@@ -30,6 +30,12 @@
           console.log(response.data)
         }).catch(error => console.log(error));
       }
+      const updateCalltoConference = async callSid => {
+        await axios.post(`${apiHost}/updateCall/${callSid}`).then(response => {
+          console.log(response.data);
+          updateCall(callSid);
+        }).catch(error => console.log(error));
+      }
       React.useState(() => {
         getCalls();
       }, [])
@@ -42,6 +48,7 @@
               <div>To: {call.to}</div>
               <div>From: {call.from}</div>
               <button onClick={()=> updateCall(call.sid)}>Update</button>
+              <button onClick={()=> updateCalltoConference(call.sid)}>Convert</button>
             </li>)
           }
         </ul>
